@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script>
+      function getUrlVars() {
+        vars = [];
+        var hash;
+        
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        
+        for(var i = 0; i < hashes.length; i++) {
+          hash = hashes[i].split('=');
+          vars.push(hash);
+        }
+        
+        return vars;
+      }
+      
+      function filterName(name) {
+        const cards = document.getElementsByClassName("card");
+        for (var i = 0; i < cards.length; i++) {
+          title = cards[i].querySelector(".card-body");
+          if (title.innerText.toLowerCase().indexOf(name.toLowerCase()) > -1) {
+            cards[i].parentNode.classList.remove("d-none");
+          }
+          else {
+            cards[i].parentNode.classList.add("d-none");
+          }
+        }
+      }
+      
+      function filterTag(name) {
+        const cards = document.getElementsByClassName("card");
+        for (var i = 0; i < cards.length; i++) {
+          title = cards[i].querySelector(".card-header");
+          if (title.innerText.toLowerCase().indexOf(name.toLowerCase()) > -1) {
+            cards[i].parentNode.classList.remove("d-none");
+          }
+          else {
+            cards[i].parentNode.classList.add("d-none");
+          }
+        }
+      }
+      
+      window.addEventListener("load", function() {
+        UrlVars = getUrlVars();
+        
+        if (UrlVars.length != 0) {
+          for(var i = 0; i < UrlVars.length; i++) {
+            param = UrlVars[i][0];
+            if (param == "q") {
+              value = decodeURI(UrlVars[i][1]);
+              name = value.replace(/\+/g, " ");
+              filterName(name);
+              
+              break;
+            }
+            if (param == "tag") {
+              value = decodeURI(UrlVars[i][1]);
+              name = value.replace(/\+/g, " ");
+              filterTag(name);
+              
+              break;
+            }
+          }
+        }
+      });
+    </script>
+    <style>
+      html, body {
+        height: 100%;
+      }
+      
+      #page-content {
+        flex: 1 0 auto;
+      }
+    </style>
+  </head>
+  <body class="d-flex flex-column">
+    <div class="d-none d-lg-block d-xl-block bg-image bg-light p-5 rounded-0 m-3 text-white" style="background-image: url('http://hq-oboi.ru/photo/prevoshodnye_na_rabochiy_stol_abstrakciya_2560x1600.jpg'); -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-position: center; background-repeat: no-repeat;">
+      <h1 class="display-4">Blog</h1>
+      <p class="lead">Articles, posts, photos and more.</p>
+    </div>
+    <div id="page-content" class="container mt-3">
+      <div class="row">
+        <div class="col-lg-3 order-last mb-3">
+          <div class="card border-0">
+            <div class="card-header">Recent articles</div>
+            <div class="card-body">
+              <h5 class="card-title">Posts</h5>
+              <p class="card-text">Top posts</p>
+              <a href="index.html?tag=Top" class="btn btn-primary rounded-0">Read</a>
+            </div>
+            <div class="list-group list-group-flush">
+              <a href="https://getbootstrap.com/" class="list-group-item list-group-item-action list-group-item-light flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Bootstrap 5</h5>
+                  <small><i class="bi bi-star-fill"></i></small>
+                </div>
+                <p class="mb-1">What's New in Bootstrap 5 and Its Features.</p>
+                <small class="text-muted">Fri, October 17</small>
+              </a>
+              <a href="https://bootswatch.com/4/" class="list-group-item list-group-item-action list-group-item-light flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Themes in Bootstrap</h5>
+                  <small><i class="bi bi-star"></i></small>
+                </div>
+                <p class="mb-1">Ready-made website themes using Bootstrap.</p>
+                <small class="text-muted">Fri, October 17</small>
+              </a>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Only the best</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9 order-first">
+          <div class="row mb-3">
+            <div class="col">
+              <form role="search" method="get" action="index.html">
+                <div class="input-group">
+                  <input class="form-control rounded-0" name="q" type="search" placeholder="Article, news or post" style="box-shadow: none;">
+                  <button class="btn btn-outline-secondary rounded-0" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+              </form>
+              <a href="index.html" class="badge badge-light">All</a>
+              <a href="index.html?tag=News" class="badge badge-light">News</a>
+              <a href="index.html?tag=Post" class="badge badge-light">Post</a>
+              <a href="index.html?tag=Sound" class="badge badge-light">Sound</a>
+            </div>
+          </div>
+          <div class="row row-cols-1 row-cols-md-2 mb-3">
+            <div class="col mb-3">
+              <div class="card border-0 h-100">
+                <div class="card-header">News<a class="sr-only sr-only-focusable" href="#content">Top</a></div>
+                <div class="card-body">
+                  <h5 class="card-title">New layout</h5>
+                  <p class="card-text">The grid system is now based on Flexbox.</p>
+                  <a href="https://getbootstrap.com/docs/4.6/utilities/flex" class="btn btn-primary rounded-0">Read</a>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Sat, October 11</small>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card border-0 h-100">
+                <div class="card-header">News</div>
+                <div class="card-body">
+                  <h5 class="card-title">Saas</h5>
+                  <p class="card-text">Saas in Bootstrap</p>
+                  <a href="https://getbootstrap.com/docs/4.6/getting-started/build-tools/#sass" class="btn btn-primary rounded-0">Read</a>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Sat, October 11</small>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card border-0 h-100">
+                <div class="card-header">Post<a class="sr-only sr-only-focusable" href="#content">Top</a></div>
+                <div class="card-body">
+                  <h5 class="card-title">Bootstrap World!</h5>
+                  <p class="card-text">Ready-made templates, themes, icons, etc.</p>
+                  <a href="https://startbootstrap.com" class="btn btn-primary rounded-0">Read</a>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Sat, October 11</small>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card border-0 h-100">
+                <div class="card-header">Sound</div>
+                <div class="card-body">
+                  <h5 class="card-title">List sounds</h5>
+                  <p class="card-text">Two game music tracks and one sound effect.</p>
+                  <a href="soundpage.html" class="btn btn-primary rounded-0">Read</a>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Sat, October 18</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small>Copyright &copy; Bootstrap 4</small>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+  </body>
+</html>
